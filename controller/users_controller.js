@@ -11,14 +11,21 @@ module.exports.profile=function(req,res){
 
 //render the sign-up page
 module.exports.signup=function(req,res){
+    // 
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
     return res.render('user_sign_up', {
-        title:"Codeial |Sign Up"
-    })
+            title:"Codeial |Sign Up"
+        })
 }
 
 //render the signin page
 
 module.exports.signIn=function(req,res){
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
     return res.render('user_sign_in',{
         title:"codeial|Sign In"
     })
@@ -51,7 +58,7 @@ module.exports.create = function(req, res){
     }
 
     User.findOne({email: req.body.email}, function(err, user){
-        if(err){console.log('error in finding user in signing up'); return}
+        if(err){console.log('error in finding user in signing up',err); return}
 
         if (!user){
             User.create(req.body, function(err, user){
@@ -68,7 +75,15 @@ module.exports.create = function(req, res){
 
 
 //sign in and create a session for the user
-// module.exports.create=function(req,res){
-//     //TODO LATER
-// }
+module.exports.createSession=function(req,res){
+    console.log("inside create session");
+    return res.redirect('/');
+}
 
+
+module.exports.destroySession=function(req,res){
+    req.logout();
+    return res.redirect('/');
+}
+
+/// are you entering correct password? yes
