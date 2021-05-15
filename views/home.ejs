@@ -6,8 +6,24 @@
 
  <section id="feed-posts">
 <h4> Posts </h4>
-<form action="" id="new-post-form" method="POST">
+<form action="/posts/create" id="new-post-form" method="POST">
 
     <textarea name="content" cols="30" rows="3"></textarea>
     <input type="submit" value="post">
 </form>
+<div id="posts-list-container">
+    <ul>
+        <% for(post of posts) {%>
+   <li>
+       <%= post.content %>
+       <small>
+           <%=post.user.name %>
+       </small>
+   </li>
+   <%}%>
+    </ul>
+
+</div>
+</section>
+
+<!-- apka syntax galat tha apne for loop close ni kra tha aur post.contetnt ke phele equal ka sign ana tha    ,, ooh thank you ,  mail kal raat se solve kr ri thi jb b koi esa errror aye toh samjh jana ejs syntax galat hai       ooh ok, I will keep thin in mind  ::)please resolve    yes ok-->
