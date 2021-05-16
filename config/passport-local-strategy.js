@@ -42,7 +42,7 @@ passport.serializeUser(function(user, done){
 passport.deserializeUser(function(id, done){
     User.findById(id, function(err, user){
         if(err){
-            console.log('Error in finding user --> Passport');
+            console.log('Error in finding user --> Passport'); // here
             return done(err);
         }
 
@@ -67,6 +67,8 @@ passport.setAuthenticatedUser = function(req, res, next){
         // req.user contains the current signed in user from the session cookie and we are just sending this to the locals for the views
         res.locals.user = req.user;
     }
+
+    console.log('ínside set authenticated user')
 
     next();
 }

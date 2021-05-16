@@ -73,7 +73,7 @@ app.use(passport.setAuthenticatedUser);
 // use express router
 app.use('/', require('./routes'));
 
-
+//whwre have u written this eror error in finding user
 app.listen(port, function(err){
     if (err){
         console.log(`Error in running the server: ${err}`);

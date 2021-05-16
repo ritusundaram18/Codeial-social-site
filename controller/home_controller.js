@@ -17,6 +17,4 @@ module.exports.home=function(req,res){
     })
 }
 
-//open robo 3T ok
-//aaap code bej skte ho zip format me check krke apko btata hu ,  yeh meri sari code?
-// haan  , ok
+
