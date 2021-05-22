@@ -5,7 +5,11 @@ const passport=require('passport');
 const usersController=require('../controller/users_controller');
 
 // router.get('/profile',usersController.profile);
-router.get('/profile',passport.checkAuthentication,usersController.profile);
+router.get('/profile/:id',passport.checkAuthentication,usersController.profile);
+
+router.post('/update/:id',passport.checkAuthentication,usersController.update);
+
+
 router.get('/sign-up', usersController.signup); // changed from signUP to signup as defined in the users_controller 
 router.get('/sign-in', usersController.signIn);
 
