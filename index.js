@@ -13,18 +13,25 @@ const sassMiddleware=require('node-sass-middleware');
 const flash=require('connect-flash');
 const customMware=require('./config/middleware');
 
-app.use(express.urlencoded());
-
-app.use(cookieParser());
-
 app.use(sassMiddleware({
                 src:'./assets/scss',
                 dest:'./assets/css',
                 debug:true,
                 outputStyle:'extended',
                 prefix:'/css'
-
+                
 }));
+
+app.use(express.urlencoded());
+app.use(expressLayouts);
+app.use(cookieParser());
+app.use(express.static('./assets'));
+// make the upload path available to the browser
+app.use('/uploads', express.static(__dirname + '/uploads'))
+app.use(expressLayouts);
+//extract style and scripts from subpages into the layout
+app.set('layout extractStyles', true);
+app.set('layout extractScripts', true);
 
 
 
@@ -36,6 +43,11 @@ app.use(sassMiddleware({
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
+//make the upload path available to the browser
+// app.use('/uploads', express.static(__dirname + '/uploads'));
+// extract style and scripts from sub pages into the layout
+// app.set('layout extractStyles', true);
+// app.set('layout extractScripts', true);
 //mongo store is used to store the session cookie in the db
 app.use(session({
     name: 'codeial',
@@ -59,12 +71,6 @@ app.use(session({
 )
 }));
 
-app.use(express.static('./assets'));
-
-app.use(expressLayouts);
-// extract style and scripts from sub pages into the layout
-app.set('layout extractStyles', true);
-app.set('layout extractScripts', true);
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -87,3 +93,5 @@ app.listen(port, function(err){
 
     console.log(`Server is running on port: ${port}`);
 });
+
+
