@@ -2,12 +2,12 @@ const passport=require('passport');
 
 const JWTStrategy=require('passport-jwt').Strategy;
 
-const Extract=require('passport-jwt').ExtractJwt;
+const ExtractJWT=require('passport-jwt').ExtractJwt;
 
-const user=require('../model/usder');
+const user=require('../model/user');
 
 let opts={
-    jwtFromRequest:ExtractJwt.fromAuthHeaderAsBearerToken(),
+    jwtFromRequest:ExtractJWT.fromAuthHeaderAsBearerToken(),
     secretOrKey: 'codeial'
 }
 
